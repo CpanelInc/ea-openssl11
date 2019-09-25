@@ -1,4 +1,4 @@
-%define pkg_base ea-openssl
+%define pkg_base ea-openssl11
 %define provider cpanel
 %global _prefix /opt/%{provider}/%{pkg_base}
 %global _opensslconfdir %{_prefix}/etc
@@ -6,7 +6,7 @@
 # end of distribution specific definitions
 
 Summary:    Cryptography and SSL/TLS Toolkit
-Name:       ea-openssl
+Name:       ea-openssl11
 %global _path_version 1.1
 Version:    1.1.1d
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4544 for more details
@@ -18,8 +18,6 @@ URL:        https://www.openssl.org/
 Vendor:     OpenSSL
 Source0:    https://www.openssl.org/source/openssl-%{version}.tar.gz
 BuildRoot:  %{_tmppath}/openssl-%{version}-%{release}-root-%(%{__id_u} -n)
-
-Provides: ea-openssl11
 
 %description
 The OpenSSL Project is a collaborative effort to develop a robust, commercial-grade, full-featured, and Open Source toolkit implementing the Transport Layer Security (TLS) and Secure Sockets Layer (SSL) protocols as well as a full-strength general purpose cryptography library. The project is managed by a worldwide community of volunteers that use the Internet to communicate, plan, and develop the OpenSSL toolkit and its related documentation.
@@ -72,7 +70,7 @@ make DESTDIR=$RPM_BUILD_ROOT install
 
 # so PHP et all can find it on 64 bit machines
 rm -f $RPM_BUILD_ROOT%{_prefix}/lib64
-ln -s %{_prefix}/lib $RPM_BUILD_ROOT/opt/cpanel/ea-openssl/lib64
+ln -s %{_prefix}/lib $RPM_BUILD_ROOT/%{_prefix}/lib64
 
 ## Symlink to system certs
 
