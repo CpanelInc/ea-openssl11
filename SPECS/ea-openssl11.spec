@@ -1,4 +1,4 @@
-%define pkg_base ea-openssl
+%define pkg_base ea-openssl11
 %define provider cpanel
 %global _prefix /opt/%{provider}/%{pkg_base}
 %global _opensslconfdir %{_prefix}/etc
@@ -6,7 +6,7 @@
 # end of distribution specific definitions
 
 Summary:    Cryptography and SSL/TLS Toolkit
-Name:       ea-openssl
+Name:       ea-openssl11
 %global _path_version 1.1
 Version:    1.1.1d
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4544 for more details
@@ -72,7 +72,7 @@ make DESTDIR=$RPM_BUILD_ROOT install
 
 # so PHP et all can find it on 64 bit machines
 rm -f $RPM_BUILD_ROOT%{_prefix}/lib64
-ln -s %{_prefix}/lib $RPM_BUILD_ROOT/opt/cpanel/ea-openssl/lib64
+ln -s %{_prefix}/lib $RPM_BUILD_ROOT/%{_prefix}/lib64
 
 ## Symlink to system certs
 
