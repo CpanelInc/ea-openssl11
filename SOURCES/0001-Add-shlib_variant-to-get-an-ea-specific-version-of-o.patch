@@ -1,0 +1,24 @@
+From d15454615b8da747ca9cdfcb2673d20e666cba56 Mon Sep 17 00:00:00 2001
+From: Julian Brown <julian.brown@cpanel.net>
+Date: Fri, 27 Sep 2019 12:45:20 -0500
+Subject: [PATCH] Add shlib_variant to get an ea specific version of openssl
+
+---
+ Configurations/10-main.conf | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/Configurations/10-main.conf b/Configurations/10-main.conf
+index 3c4299d..1929b47 100644
+--- a/Configurations/10-main.conf
++++ b/Configurations/10-main.conf
+@@ -797,6 +797,7 @@ my %targets = (
+         bn_ops           => "SIXTY_FOUR_BIT_LONG",
+         perlasm_scheme   => "elf",
+         multilib         => "64",
++        shlib_variant    => "-ea",
+     },
+     "linux-x86_64-clang" => {
+         inherit_from     => [ "linux-x86_64" ],
+-- 
+2.23.0
+
