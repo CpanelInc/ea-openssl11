@@ -19,6 +19,8 @@ Vendor:     OpenSSL
 Source0:    https://www.openssl.org/source/openssl-%{version}.tar.gz
 BuildRoot:  %{_tmppath}/openssl-%{version}-%{release}-root-%(%{__id_u} -n)
 
+Patch0: 0001-Add-shlib_variant-to-get-an-ea-specific-version-of-o.patch
+
 %description
 The OpenSSL Project is a collaborative effort to develop a robust, commercial-grade, full-featured, and Open Source toolkit implementing the Transport Layer Security (TLS) and Secure Sockets Layer (SSL) protocols as well as a full-strength general purpose cryptography library. The project is managed by a worldwide community of volunteers that use the Internet to communicate, plan, and develop the OpenSSL toolkit and its related documentation.
 OpenSSL is based on the excellent SSLeay library developed by Eric Young and Tim Hudson. The OpenSSL toolkit is licensed under an Apache-style license, which basically means that you are free to get and use it for commercial and non-commercial purposes subject to some simple license conditions.
@@ -46,17 +48,21 @@ support various cryptographic algorithms and protocols.
 #protocols.
 
 %prep
+
 %setup -q -n openssl-%{version}
+
+%patch0 -p1
 
 %build
 # Force dependency resolution to pick /usr/bin/perl instead of /bin/perl
 # This helps downstream users of our RPMS (see: EA-7468)
+
 export PATH="/usr/bin:$PATH"
 ./config \
     -Wl,-rpath=%{_prefix}/%{_lib} \
     --prefix=%{_prefix} \
     --openssldir=%{_opensslconfdir}/pki/tls \
-    no-ssl2 no-ssl3 shared -fPIC \
+    no-ssl2 no-ssl3 shared -fPIC
 
 make depend
 make all
@@ -96,8 +102,8 @@ ln -s %{_prefix}/lib $RPM_BUILD_ROOT/%{_prefix}/lib64
 %{_prefix}/etc
 %{_prefix}/share
 %config(noreplace) %{_opensslconfdir}/pki/tls/openssl.cnf
-%attr(0755,root,root) %{_prefix}/lib/libcrypto.so.%{_path_version}
-%attr(0755,root,root) %{_prefix}/lib/libssl.so.%{_path_version}
+%attr(0755,root,root) %{_prefix}/lib/libcrypto-ea.so.%{_path_version}
+%attr(0755,root,root) %{_prefix}/lib/libssl-ea.so.%{_path_version}
 
 %files devel
 %defattr(-,root,root)
