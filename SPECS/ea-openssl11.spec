@@ -78,6 +78,9 @@ make DESTDIR=$RPM_BUILD_ROOT install
 rm -f $RPM_BUILD_ROOT%{_prefix}/lib64
 ln -s %{_prefix}/lib $RPM_BUILD_ROOT/%{_prefix}/lib64
 
+ln -s %{_prefix}/lib/libcrypto-ea.so.%{_path_version} $RPM_BUILD_ROOT/%{_prefix}/lib/libcrypto.so.%{_path_version}
+ln -s %{_prefix}/lib/libssl-ea.so.%{_path_version} $RPM_BUILD_ROOT/%{_prefix}/lib/libssl.so.%{_path_version}
+
 ## Symlink to system certs
 
 %__rm -rf $RPM_BUILD_ROOT%{_opensslconfdir}/pki/tls/{cert.pem,certs,misc,private}
@@ -102,6 +105,8 @@ ln -s %{_prefix}/lib $RPM_BUILD_ROOT/%{_prefix}/lib64
 %{_prefix}/etc
 %{_prefix}/share
 %config(noreplace) %{_opensslconfdir}/pki/tls/openssl.cnf
+%{_prefix}/lib/libcrypto.so.%{_path_version}
+%{_prefix}/lib/libssl.so.%{_path_version}
 %attr(0755,root,root) %{_prefix}/lib/libcrypto-ea.so.%{_path_version}
 %attr(0755,root,root) %{_prefix}/lib/libssl-ea.so.%{_path_version}
 
