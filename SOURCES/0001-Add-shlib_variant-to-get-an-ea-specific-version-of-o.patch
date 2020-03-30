@@ -1,4 +1,4 @@
-From d15454615b8da747ca9cdfcb2673d20e666cba56 Mon Sep 17 00:00:00 2001
+From 73041ffc6499b2690afda7c878723419cb244bbc Mon Sep 17 00:00:00 2001
 From: Julian Brown <julian.brown@cpanel.net>
 Date: Fri, 27 Sep 2019 12:45:20 -0500
 Subject: [PATCH] Add shlib_variant to get an ea specific version of openssl
@@ -8,7 +8,7 @@ Subject: [PATCH] Add shlib_variant to get an ea specific version of openssl
  1 file changed, 1 insertion(+)
 
 diff --git a/Configurations/10-main.conf b/Configurations/10-main.conf
-index 3c4299d..1929b47 100644
+index df1cc00..bd6d0f6 100644
 --- a/Configurations/10-main.conf
 +++ b/Configurations/10-main.conf
 @@ -797,6 +797,7 @@ my %targets = (
@@ -20,5 +20,5 @@ index 3c4299d..1929b47 100644
      "linux-x86_64-clang" => {
          inherit_from     => [ "linux-x86_64" ],
 -- 
-2.23.0
+2.24.1
 
