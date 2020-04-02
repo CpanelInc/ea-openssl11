@@ -1,4 +1,4 @@
-From 73041ffc6499b2690afda7c878723419cb244bbc Mon Sep 17 00:00:00 2001
+From 57abcf7d91f4aaf058b88336ed5b45f6b2033c0d Mon Sep 17 00:00:00 2001
 From: Julian Brown <julian.brown@cpanel.net>
 Date: Fri, 27 Sep 2019 12:45:20 -0500
 Subject: [PATCH] Add shlib_variant to get an ea specific version of openssl
