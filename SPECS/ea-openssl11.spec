@@ -31,6 +31,8 @@ Group: Development/Libraries
 Requires: krb5-devel%{?_isa}, zlib-devel%{?_isa}
 Requires: pkgconfig
 
+%global debug_package %{nil}
+
 %description devel
 OpenSSL is a toolkit for supporting cryptography. The openssl-devel
 package contains include files needed to develop applications which
@@ -105,8 +107,6 @@ ln -s %{_prefix}/lib/libssl-ea.so.%{_path_version} $RPM_BUILD_ROOT/%{_prefix}/li
 %{_prefix}/etc
 %{_prefix}/share
 %config(noreplace) %{_opensslconfdir}/pki/tls/openssl.cnf
-%{_prefix}/lib/libcrypto.so.%{_path_version}
-%{_prefix}/lib/libssl.so.%{_path_version}
 %attr(0755,root,root) %{_prefix}/lib/libcrypto-ea.so.%{_path_version}
 %attr(0755,root,root) %{_prefix}/lib/libssl-ea.so.%{_path_version}
 
