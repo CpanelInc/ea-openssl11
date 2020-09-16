@@ -77,7 +77,7 @@ mkdir -p $RPM_BUILD_ROOT%{_prefix}/ssl
 make DESTDIR=$RPM_BUILD_ROOT install
 
 # so PHP et all can find it on 64 bit machines
-rm -f $RPM_BUILD_ROOT%{_prefix}/lib64
+rm -rf $RPM_BUILD_ROOT%{_prefix}/lib64
 ln -s %{_prefix}/lib $RPM_BUILD_ROOT/%{_prefix}/lib64
 
 ln -s %{_prefix}/lib/libcrypto-ea.so.%{_path_version} $RPM_BUILD_ROOT/%{_prefix}/lib/libcrypto.so.%{_path_version}
