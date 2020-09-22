@@ -10,7 +10,7 @@ Name:       ea-openssl11
 %global _path_version 1.1
 Version:    1.1.1g
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4544 for more details
-%define release_prefix 2
+%define release_prefix 3
 Release: %{release_prefix}%{?dist}.cpanel
 License:    OpenSSL
 Group:      System Environment/Libraries
@@ -77,7 +77,7 @@ mkdir -p $RPM_BUILD_ROOT%{_prefix}/ssl
 make DESTDIR=$RPM_BUILD_ROOT install
 
 # so PHP et all can find it on 64 bit machines
-rm -f $RPM_BUILD_ROOT%{_prefix}/lib64
+rm -rf $RPM_BUILD_ROOT%{_prefix}/lib64
 ln -s %{_prefix}/lib $RPM_BUILD_ROOT/%{_prefix}/lib64
 
 ln -s %{_prefix}/lib/libcrypto-ea.so.%{_path_version} $RPM_BUILD_ROOT/%{_prefix}/lib/libcrypto.so.%{_path_version}
@@ -119,6 +119,9 @@ ln -s %{_prefix}/lib/libssl-ea.so.%{_path_version} $RPM_BUILD_ROOT/%{_prefix}/li
 %postun -p /sbin/ldconfig
 
 %changelog
+* Wed Sep 16 2020 Tim Mullin <tim@cpanel.net> - 1.1.1g-3
+- EA-9303: Fix ea-openssl11 directory removal flags
+
 * Thu May 07 2020 Julian Brown <julian.brown@cpanel.net> - 1.1.1g-2
 - ZC-6733: Get it to build on C8
 
