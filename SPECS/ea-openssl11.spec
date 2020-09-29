@@ -8,9 +8,9 @@
 Summary:    Cryptography and SSL/TLS Toolkit
 Name:       ea-openssl11
 %global _path_version 1.1
-Version:    1.1.1g
+Version:    1.1.1h
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4544 for more details
-%define release_prefix 3
+%define release_prefix 1
 Release: %{release_prefix}%{?dist}.cpanel
 License:    OpenSSL
 Group:      System Environment/Libraries
@@ -119,6 +119,9 @@ ln -s %{_prefix}/lib/libssl-ea.so.%{_path_version} $RPM_BUILD_ROOT/%{_prefix}/li
 %postun -p /sbin/ldconfig
 
 %changelog
+* Fri Sep 25 2020 Cory McIntire <cory@cpanel.net> - 1.1.1h-1
+- EA-9320: Update ea-openssl11 from v1.1.1g to v1.1.1h
+
 * Wed Sep 16 2020 Tim Mullin <tim@cpanel.net> - 1.1.1g-3
 - EA-9303: Fix ea-openssl11 directory removal flags
 
