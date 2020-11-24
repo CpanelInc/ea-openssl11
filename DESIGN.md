@@ -25,12 +25,12 @@
         *   I have to link our executables and dynamic libraries against both our ea-openssl11, and system openssl.
         *   The reason is because:
             *   I would satisfy all of our libraries and executables with ea-openssl11 symbols
-            *   But because of the way C8 is designed, I need to bring in other libraries which are built agains system openssl only.
+            *   But because of the way C8 is designed, I need to bring in other libraries which are built against system openssl only.
             *   So much confusion because of the doubly linked files.
             *   That is probably unstable as well.
     *   Why did we create ea-openssl11 in the first place?
         *   Back in the C5, C6 days, system openssl was no longer kept up to date on the distro.
-        *   We introduced ea-openssl, and kept is secure.
+        *   We introduced ea-openssl, and kept it secure.
         *   We further added features necessary to cPanel.
         *   At one point, we needed openssl11 for both security and feature set issues.
         *   Well C6 was not going to support openssl11, so we created ea-openssl11.
