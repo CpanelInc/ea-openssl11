@@ -1,4 +1,4 @@
-# INSERT TITLE HERE
+# EA4 openssl on C8 and beyond
 
 ## Target Audiences
 
@@ -54,31 +54,20 @@
 
 ## Overall Intent
 
-…
-
-### Piece 1 Intent
-
-…
-
-### Piece 2 Intent
-
-…
-
-### Piece 3 Intent
-
-…
+Find the most sustainable way to do openssl for EA4 on C8 and beyond.
 
 ## Maintainability
 
-Estimate:
-
-1. how much time and resources will be needed to maintain the feature in the future
-2. how frequently maintenance will need to happen
+Included in table below.
 
 ## Options/Decisions
 
 …
 
+### Conclusion
+
+Go with system openssl on C8 for now. Revisit as needed as time passes and probably do this dance again w/ ea-openssl30.
+
 ## Child Documents
 
-* [more test](./DESIGN/more.md)
+None.
