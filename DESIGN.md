@@ -9,6 +9,13 @@
 
 ## Detailed Summary
 
+**TL;DR**:
+
+* ea-openssl11’s shlib variant does not work for C8
+* C8 also does not like the non-shlib variant w/out the entire openssl 3.0 back-patch from fedora
+
+**Details**:
+
 *   ea-openssl11, was built with the sym-variant flag, where our symbols are OPENSSL\_EA\_1\_1\_1, instead of OPENSSL\_1\_1\_1.
     *   This was done a few years ago, with the intent our library would not interfere with the system openssl library.
     *   Our symbols would only satisfy with our library.
