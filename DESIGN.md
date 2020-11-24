@@ -106,7 +106,7 @@ Included in table below.
 <td>
 <ul>
 <li>Is it really any newer or providing anything more than system openssl at this point?</li>
-<li>Hard to maintain as will need a way to track changes to fedora's patches for upgrades as well</li>
+<li>Hard to maintain as we will need a way to track changes to fedora's patches for upgrades as well</li>
 <li>Easy to miss CVEs being fixed in fedora's patchset</li></ul></td>
 <td>
 <ul>
@@ -114,7 +114,7 @@ Included in table below.
 <li>We will also need to monitor fedora's patchset for new patches and bug fixes being added to existing patches and update as necessary for those</li></ul></td>
 <td>
 <ul>
-<li>Not doing this as it increasing risk without providing enough value</li></ul></td></tr>
+<li>Not doing this as it increases risk without providing enough value</li></ul></td></tr>
 <tr>
 <td colspan="1">ea-openssl11 w/out Fedora patchset (what we are currently doing)</td>
 <td colspan="1">
