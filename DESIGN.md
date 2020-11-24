@@ -62,6 +62,8 @@ Included in table below.
 
 ## Options/Decisions
 
+**Note**: Options will need `if > 7 else` logic in 13 packages in addition to libcurl and ruby 2.7 that are in play already. Would also mean doing the system libcurl on C8.
+
 <!-- from wiki’s “View Storage Format” -->
 <table><colgroup><col /><col /><col /><col /><col /></colgroup>
 <tbody>
