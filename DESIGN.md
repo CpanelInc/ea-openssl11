@@ -62,7 +62,79 @@ Included in table below.
 
 ## Options/Decisions
 
-…
+<!-- from wiki’s “View Storage Format” -->
+<table><colgroup><col /><col /><col /><col /><col /></colgroup>
+<tbody>
+<tr>
+<th>OPTIONS</th>
+<th>VALUE</th>
+<th>DRAWBACK</th>
+<th>MAINTENANCE</th>
+<th>DECISION</th></tr>
+<tr>
+<td>Use System openssl</td>
+<td>
+<ul>
+<li>Fedora/CentOS handles maintenance of the package</li>
+<li>Less work for EA/ZC on C8</li></ul>
+<p><br /></p></td>
+<td>
+<ul>
+<li>C8 will get old eventually and the package will be on its last leg</li>
+<li>We will likely need to build ea-openssl30 by then anyway</li></ul></td>
+<td>
+<ul>
+<li>None</li></ul></td>
+<td>
+<ul>
+<li>At this time, we think this is the way to go</li></ul></td></tr>
+<tr>
+<td>ea-openssl11 w/ Fedora patchset</td>
+<td>
+<ul>
+<li>Customers get a preview of openssl 3.0 features that are currently in alpha</li></ul></td>
+<td>
+<ul>
+<li>Is it really any newer or providing anything more than system openssl at this point?</li>
+<li>Hard to maintain as will need a way to track changes to fedora's patches for upgrades as well</li>
+<li>Easy to miss CVEs being fixed in fedora's patchset</li></ul></td>
+<td>
+<ul>
+<li>We will need to keep the version of openssl up to date</li>
+<li>We will also need to monitor fedora's patchset for new patches and bug fixes being added to existing patches and update as necessary for those</li></ul></td>
+<td>
+<ul>
+<li>Not doing this as it increasing risk without providing enough value</li></ul></td></tr>
+<tr>
+<td colspan="1">ea-openssl11 w/out Fedora patchset (what we are currently doing)</td>
+<td colspan="1">
+<ul>
+<li>None, our version of openssl would technically be older than system since system openssl has openssl 3.0 features in it</li></ul></td>
+<td colspan="1">
+<ul>
+<li>Linking is very difficult and time consuming</li>
+<li>We end up linked against our openssl and system openssl due to the system packages that we bring in requiring openssl 3.0 features provided by the system</li></ul></td>
+<td colspan="1">
+<ul>
+<li>Untenable</li></ul></td>
+<td colspan="1">
+<ul>
+<li>No, just no</li></ul></td></tr>
+<tr>
+<td colspan="1">ea-openssl11 w/out Fedora patchset but we build the world to compile against ea-openssl11</td>
+<td colspan="1">
+<ul>
+<li>Everything just links against our openssl</li></ul></td>
+<td colspan="1">
+<ul>
+<li>Increases maintenance burden significantly</li>
+<li>We incur risk for CVEs as they come up (we would likely need to have multiple EA maintenance releases per week)</li></ul></td>
+<td colspan="1">
+<ul>
+<li>Untenable</li></ul></td>
+<td colspan="1">
+<ul>
+<li>Do we really want to become cPanel OS?</li></ul></td></tr></tbody></table>
 
 ### Conclusion
 
