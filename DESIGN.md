@@ -9,7 +9,48 @@
 
 ## Detailed Summary
 
-…
+*   ea-openssl11, was built with the sym-variant flag, where our symbols are OPENSSL\_EA\_1\_1\_1, instead of OPENSSL\_1\_1\_1.
+    *   This was done a few years ago, with the intent our library would not interfere with the system openssl library.
+    *   Our symbols would only satisfy with our library.
+    *   That worked great on C6 and C7.  But on C8 this has become untenable.
+        *   On C8
+        *   I have to link our executables and dynamic libraries against both our ea-openssl11, and system openssl.
+        *   The reason is because:
+            *   I would satisfy all of our libraries and executables with ea-openssl11 symbols
+            *   But because of the way C8 is designed, I need to bring in other libraries which are built agains system openssl only.
+            *   So much confusion because of the doubly linked files.
+            *   That is probably unstable as well.
+    *   Why did we create ea-openssl11 in the first place?
+        *   Back in the C5, C6 days, system openssl was no longer kept up to date on the distro.
+        *   We introduced ea-openssl, and kept is secure.
+        *   We further added features necessary to cPanel.
+        *   At one point, we needed openssl11 for both security and feature set issues.
+        *   Well C6 was not going to support openssl11, so we created ea-openssl11.
+        *   We then were able to continue.
+    *   Our current plan is to build all of our C8 products against system openssl.
+        *   This is primarily because ea-openssl11, has the sym variant option.
+        *   We have evaluated modifying ea-openssl11 to not use the sym variant, which is discussed later.
+        *   We chose the system openssl to simplify the builds/linking steps.
+        *   The distro has the incentive to maintain the openssl library and will do so for a long time, perhaps 4 years or longer.
+        *   That means our duplicate openssl is just a maintenance burden.
+        *   The links will be so much easier.
+        *   We do have to change a lot of rpms, but this should be a non breaking set of changes.
+        *   At some point we may have to revisit this and create the openssl11 without the sym variant discussed below.
+        *   This is **not** a breaking set of changes.
+    *   Alternative plan, update ea-openssl11, to not have the sym variant options
+        *   This is doable, but we found out something disturbing.
+        *   The intent is all of our executables and dynamic libraries would be built against ea-openssl11, and the external libraries we bring in would satisfy their openssl symbols against our library and not the system library.
+        *   This simplifies the building and linking significantly.
+        *   There are a bunch of gotcha’s.
+            *   First and foremost, this is a breaking change.  They will have to update the entire ea stack, and it would make downgrading very difficult at this point.
+            *   Second and just as big, vanilla openssl is not sufficient.  Fedora/CentOS/Redhat brought entire features into openssl11, from openssl3.0.
+                *   Openssl 3.0 is in alpha state
+                *   So they created a series of patches to bring those features into openssl 1.1.
+                *   We would have to copy those patches into ours and either maintain them ourselves, or continue to pull them in and perhaps patch the patches.
+                *   This makes our openssl 11 maintenance burden very high.
+    *   If we go with either option, we have to rebuild the full stack.
+        *   Doing ea-openssl11 would be a breaking change
+        *   Doing system openssl11 is not a breaking change
 
 ## Overall Intent
 
