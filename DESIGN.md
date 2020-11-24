@@ -2,11 +2,11 @@
 
 ## Target Audiences
 
-0. Server Owners
-1. Maintenance and security teams
-2. Training and technical support
-3. Managers and other internal key stakeholders
-4. Future project/feature owners/maintainers
+1. Server Owners
+2. Maintenance and security teams
+3. Training and technical support
+4. Managers and other internal key stakeholders
+5. Future project/feature owners/maintainers
 
 ## Detailed Summary
 
