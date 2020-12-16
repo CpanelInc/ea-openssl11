@@ -8,7 +8,7 @@ Subject: [PATCH] Add shlib_variant to get an ea specific version of openssl
  1 file changed, 1 insertion(+)
 
 diff --git a/Configurations/10-main.conf b/Configurations/10-main.conf
-index eb92c24..83044fd 100644
+index cea4feb..de6f888 100644
 --- a/Configurations/10-main.conf
 +++ b/Configurations/10-main.conf
 @@ -797,6 +797,7 @@ my %targets = (
