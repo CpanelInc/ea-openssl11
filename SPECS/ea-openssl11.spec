@@ -121,6 +121,9 @@ ln -s %{_prefix}/lib/libssl-ea.so.%{_path_version} $RPM_BUILD_ROOT/%{_prefix}/li
 %changelog
 * Mon Feb 22 2021 Cory McIntire <cory@cpanel.net> - 1.1.1j-1
 - EA-9590: Update ea-openssl11 from v1.1.1i to v1.1.1j
+  Null pointer deref in X509_issuer_and_serial_hash() (CVE-2021-23841)
+  Incorrect SSLv2 rollback protection (CVE-2021-23839)
+  Integer overflow in CipherUpdate (CVE-2021-23840)
 
 * Thu Dec 10 2020 Cory McIntire <cory@cpanel.net> - 1.1.1i-1
 - EA-9478: Update ea-openssl11 from v1.1.1h to v1.1.1i

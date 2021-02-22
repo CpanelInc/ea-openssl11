@@ -8,10 +8,10 @@ Subject: [PATCH] Add shlib_variant to get an ea specific version of openssl
  1 file changed, 1 insertion(+)
 
 diff --git a/Configurations/10-main.conf b/Configurations/10-main.conf
-index cea4feb..de6f888 100644
+index 8dc3e85..8d1eef7 100644
 --- a/Configurations/10-main.conf
 +++ b/Configurations/10-main.conf
-@@ -797,6 +797,7 @@ my %targets = (
+@@ -798,6 +798,7 @@ my %targets = (
          bn_ops           => "SIXTY_FOUR_BIT_LONG",
          perlasm_scheme   => "elf",
          multilib         => "64",
