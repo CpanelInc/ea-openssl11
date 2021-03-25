@@ -8,7 +8,7 @@
 Summary:    Cryptography and SSL/TLS Toolkit
 Name:       ea-openssl11
 %global _path_version 1.1
-Version:    1.1.1j
+Version:    1.1.1k
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4544 for more details
 %define release_prefix 1
 Release: %{release_prefix}%{?dist}.cpanel
@@ -119,6 +119,9 @@ ln -s %{_prefix}/lib/libssl-ea.so.%{_path_version} $RPM_BUILD_ROOT/%{_prefix}/li
 %postun -p /sbin/ldconfig
 
 %changelog
+* Thu Mar 25 2021 Cory McIntire <cory@cpanel.net> - 1.1.1k-1
+- EA-9664: Update ea-openssl11 from v1.1.1j to v1.1.1k
+
 * Mon Feb 22 2021 Cory McIntire <cory@cpanel.net> - 1.1.1j-1
 - EA-9590: Update ea-openssl11 from v1.1.1i to v1.1.1j
   Null pointer deref in X509_issuer_and_serial_hash() (CVE-2021-23841)
