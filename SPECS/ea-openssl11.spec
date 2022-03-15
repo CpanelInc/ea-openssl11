@@ -8,9 +8,9 @@
 Summary:    Cryptography and SSL/TLS Toolkit
 Name:       ea-openssl11
 %global _path_version 1.1
-Version:    1.1.1m
+Version:    1.1.1n
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4544 for more details
-%define release_prefix 2
+%define release_prefix 1
 Release: %{release_prefix}%{?dist}.cpanel
 License:    OpenSSL
 Group:      System Environment/Libraries
@@ -119,6 +119,9 @@ ln -s %{_prefix}/lib/libssl-ea.so.%{_path_version} $RPM_BUILD_ROOT/%{_prefix}/li
 %postun -p /sbin/ldconfig
 
 %changelog
+* Tue Mar 15 2022 Cory McIntire <cory@cpanel.net> - 1.1.1n-1
+- EA-10564: Update ea-openssl11 from v1.1.1m to v1.1.1n
+
 * Tue Dec 28 2021 Dan Muey <dan@cpanel.net> - 1.1.1m-2
 - ZC-9589: Update DISABLE_BUILD to match OBS
 
