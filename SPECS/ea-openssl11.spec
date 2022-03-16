@@ -121,6 +121,7 @@ ln -s %{_prefix}/lib/libssl-ea.so.%{_path_version} $RPM_BUILD_ROOT/%{_prefix}/li
 %changelog
 * Tue Mar 15 2022 Cory McIntire <cory@cpanel.net> - 1.1.1n-1
 - EA-10564: Update ea-openssl11 from v1.1.1m to v1.1.1n
+- Infinite loop in BN_mod_sqrt() reachable when parsing certificates (CVE-2022-0778)
 
 * Tue Dec 28 2021 Dan Muey <dan@cpanel.net> - 1.1.1m-2
 - ZC-9589: Update DISABLE_BUILD to match OBS
