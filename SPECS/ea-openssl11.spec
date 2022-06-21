@@ -8,7 +8,7 @@
 Summary:    Cryptography and SSL/TLS Toolkit
 Name:       ea-openssl11
 %global _path_version 1.1
-Version:    1.1.1o
+Version:    1.1.1p
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4544 for more details
 %define release_prefix 1
 Release: %{release_prefix}%{?dist}.cpanel
@@ -119,6 +119,10 @@ ln -s %{_prefix}/lib/libssl-ea.so.%{_path_version} $RPM_BUILD_ROOT/%{_prefix}/li
 %postun -p /sbin/ldconfig
 
 %changelog
+* Tue Jun 21 2022 Cory McIntire <cory@cpanel.net> - 1.1.1p-1
+- EA-10773: Update ea-openssl11 from v1.1.1o to v1.1.1p
+- The c_rehash script allows command injection (CVE-2022-2068)
+
 * Tue May 03 2022 Cory McIntire <cory@cpanel.net> - 1.1.1o-1
 - EA-10676: Update ea-openssl11 from v1.1.1n to v1.1.1o
 
