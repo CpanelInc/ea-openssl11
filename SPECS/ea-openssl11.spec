@@ -31,8 +31,6 @@ Group: Development/Libraries
 Requires: krb5-devel%{?_isa}, zlib-devel%{?_isa}
 Requires: pkgconfig
 
-%global debug_package %{nil}
-
 %description devel
 OpenSSL is a toolkit for supporting cryptography. The openssl-devel
 package contains include files needed to develop applications which
