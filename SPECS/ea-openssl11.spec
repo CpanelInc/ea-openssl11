@@ -10,7 +10,7 @@ Name:       ea-openssl11
 %global _path_version 1.1
 Version:    1.1.1t
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4544 for more details
-%define release_prefix 1
+%define release_prefix 2
 Release: %{release_prefix}%{?dist}.cpanel
 License:    OpenSSL
 Group:      System Environment/Libraries
@@ -30,8 +30,6 @@ Summary: Files for development of applications which will use OpenSSL
 Group: Development/Libraries
 Requires: krb5-devel%{?_isa}, zlib-devel%{?_isa}
 Requires: pkgconfig
-
-%global debug_package %{nil}
 
 %description devel
 OpenSSL is a toolkit for supporting cryptography. The openssl-devel
@@ -119,6 +117,9 @@ ln -s %{_prefix}/lib/libssl-ea.so.%{_path_version} $RPM_BUILD_ROOT/%{_prefix}/li
 %postun -p /sbin/ldconfig
 
 %changelog
+* Tue Apr 04 2023 Julian Brown <julian.brown@cpanel.net> - 1.1.1t-2
+- ZC-10047: Do not build on Ubuntu 22
+
 * Tue Feb 07 2023 Cory McIntire <cory@cpanel.net> - 1.1.1t-1
 - EA-11213: Update ea-openssl11 from v1.1.1s to v1.1.1t
 - X.400 address type confusion in X.509 GeneralName (CVE-2023-0286)
