@@ -51,7 +51,7 @@ sub _add_sum {
     }
 
     my $name     = $hr->{tarball}{name};
-    my $checksum = ( $res->{content} =~ /((?i)[0-9a-f]+)$/m )[0];
+    my $checksum = ( $res->{content} =~ /^\s*((?i)[0-9a-f]+)\s*$/m )[0];
     unless ($checksum) {
         die "No checksum for $name at $checksum_url:\nContent: $res->{content}\n";
     }
