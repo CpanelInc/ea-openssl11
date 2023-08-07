@@ -8,7 +8,7 @@
 Summary:    Cryptography and SSL/TLS Toolkit
 Name:       ea-openssl11
 %global _path_version 1.1
-Version:    1.1.1u
+Version:    1.1.1v
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4544 for more details
 %define release_prefix 1
 Release: %{release_prefix}%{?dist}.cpanel
@@ -117,6 +117,11 @@ ln -s %{_prefix}/lib/libssl-ea.so.%{_path_version} $RPM_BUILD_ROOT/%{_prefix}/li
 %postun -p /sbin/ldconfig
 
 %changelog
+* Tue Aug 01 2023 Cory McIntire <cory@cpanel.net> - 1.1.1v-1
+- EA-11578: Update ea-openssl11 from v1.1.1u to v1.1.1v
+	- Fix excessive time spent checking DH q parameter value (CVE-2023-3817)
+	- Fix DH_check() excessive time with over sized modulus (CVE-2023-3446)
+
 * Tue May 30 2023 Cory McIntire <cory@cpanel.net> - 1.1.1u-1
 - EA-11449: Update ea-openssl11 from v1.1.1t to v1.1.1u
     - Possible DoS translating ASN.1 object identifiers (CVE-2023-2650)
