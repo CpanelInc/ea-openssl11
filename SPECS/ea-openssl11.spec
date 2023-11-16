@@ -10,7 +10,7 @@ Name:       ea-openssl11
 %global _path_version 1.1
 Version:    1.1.1w
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4544 for more details
-%define release_prefix 1
+%define release_prefix 2
 Release: %{release_prefix}%{?dist}.cpanel
 License:    OpenSSL
 Group:      System Environment/Libraries
@@ -117,6 +117,9 @@ ln -s %{_prefix}/lib/libssl-ea.so.%{_path_version} $RPM_BUILD_ROOT/%{_prefix}/li
 %postun -p /sbin/ldconfig
 
 %changelog
+* Thu Nov 16 2023 Cory McIntire <cory@cpanel.net> - 1.1.1w-2
+- EA-11818: Update ea-openssl11 for CVE-2023-5678
+
 * Mon Sep 11 2023 Cory McIntire <cory@cpanel.net> - 1.1.1w-1
 - EA-11665: Update ea-openssl11 from v1.1.1v to v1.1.1w
 	- Fix POLY1305 MAC implementation corrupting XMM registers on Windows (CVE-2023-4807)
