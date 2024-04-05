@@ -10,7 +10,7 @@ Name:       ea-openssl11
 %global _path_version 1.1
 Version:    1.1.1w
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4544 for more details
-%define release_prefix 2
+%define release_prefix 3
 Release: %{release_prefix}%{?dist}.cpanel
 License:    OpenSSL
 Group:      System Environment/Libraries
@@ -20,6 +20,10 @@ Source0:    https://www.openssl.org/source/openssl-%{version}.tar.gz
 BuildRoot:  %{_tmppath}/openssl-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Patch0: 0001-Add-shlib_variant-to-get-an-ea-specific-version-of-o.patch
+Patch1: 0002-cve-2023-5678.patch
+Patch2: 0003-cve-2024-0727.patch
+
+
 
 %description
 The OpenSSL Project is a collaborative effort to develop a robust, commercial-grade, full-featured, and Open Source toolkit implementing the Transport Layer Security (TLS) and Secure Sockets Layer (SSL) protocols as well as a full-strength general purpose cryptography library. The project is managed by a worldwide community of volunteers that use the Internet to communicate, plan, and develop the OpenSSL toolkit and its related documentation.
@@ -52,6 +56,8 @@ support various cryptographic algorithms and protocols.
 %setup -q -n openssl-%{version}
 
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
 # Force dependency resolution to pick /usr/bin/perl instead of /bin/perl
@@ -117,6 +123,9 @@ ln -s %{_prefix}/lib/libssl-ea.so.%{_path_version} $RPM_BUILD_ROOT/%{_prefix}/li
 %postun -p /sbin/ldconfig
 
 %changelog
+* Fri Apr 07 2024 Cory McIntire <cory@cpanel.net> - 1.1.1w-3
+- EA-12071: Update ea-openssl11 for CVE-2023-5678 (additional patch) and CVE-2024-0727
+
 * Thu Nov 16 2023 Cory McIntire <cory@cpanel.net> - 1.1.1w-2
 - EA-11818: Update ea-openssl11 for CVE-2023-5678
 
