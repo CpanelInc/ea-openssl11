@@ -10,7 +10,7 @@ Name:       ea-openssl11
 %global _path_version 1.1
 Version:    1.1.1w
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4544 for more details
-%define release_prefix 3
+%define release_prefix 4
 Release: %{release_prefix}%{?dist}.cpanel
 License:    OpenSSL
 Group:      System Environment/Libraries
@@ -22,6 +22,7 @@ BuildRoot:  %{_tmppath}/openssl-%{version}-%{release}-root-%(%{__id_u} -n)
 Patch0: 0001-Add-shlib_variant-to-get-an-ea-specific-version-of-o.patch
 Patch1: 0002-cve-2023-5678.patch
 Patch2: 0003-cve-2024-0727.patch
+Patch3: 0004-cve-2024-4741.patch
 
 
 
@@ -58,6 +59,7 @@ support various cryptographic algorithms and protocols.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 # Force dependency resolution to pick /usr/bin/perl instead of /bin/perl
@@ -123,6 +125,9 @@ ln -s %{_prefix}/lib/libssl-ea.so.%{_path_version} $RPM_BUILD_ROOT/%{_prefix}/li
 %postun -p /sbin/ldconfig
 
 %changelog
+* Tue Jul 09 2024 Cory McIntire <cory@cpanel.net> - 1.1.1w-4
+- EA-12205: Patch ea-openssl11 for CVE-2024-4741
+
 * Fri Apr 07 2024 Cory McIntire <cory@cpanel.net> - 1.1.1w-3
 - EA-12071: Update ea-openssl11 for CVE-2023-5678 (additional patch) and CVE-2024-0727
 
