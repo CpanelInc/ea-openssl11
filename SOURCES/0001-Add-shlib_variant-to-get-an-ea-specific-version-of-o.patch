@@ -1,8 +1,7 @@
-From a9da80f81657ec86a6be8916d5a2199779dd62cb Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Julian Brown <julian.brown@cpanel.net>
 Date: Fri, 27 Sep 2019 12:45:20 -0500
-Subject: [PATCH 1/4] Add shlib_variant to get an ea specific version of
- openssl
+Subject: [PATCH] Add shlib_variant to get an ea specific version of openssl
 
 ---
  Configurations/10-main.conf | 1 +
@@ -20,6 +19,3 @@ index f815a09..d374aea 100644
      },
      "linux-x86_64-clang" => {
          inherit_from     => [ "linux-x86_64" ],
--- 
-2.43.2
-

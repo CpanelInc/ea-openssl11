@@ -10,7 +10,7 @@ Name:       ea-openssl11
 %global _path_version 1.1
 Version:    1.1.1w
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4544 for more details
-%define release_prefix 4
+%define release_prefix 5
 Release: %{release_prefix}%{?dist}.cpanel
 License:    OpenSSL
 Group:      System Environment/Libraries
@@ -20,9 +20,20 @@ Source0:    https://www.openssl.org/source/openssl-%{version}.tar.gz
 BuildRoot:  %{_tmppath}/openssl-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Patch0: 0001-Add-shlib_variant-to-get-an-ea-specific-version-of-o.patch
-Patch1: 0002-cve-2023-5678.patch
-Patch2: 0003-cve-2024-0727.patch
-Patch3: 0004-cve-2024-4741.patch
+Patch1: openssl-1.1.1w-cve-2023-5678.patch
+Patch2: openssl-1.1.1w-cve-2024-0727.patch
+Patch3: openssl-1.1.1w-cve-2024-4741.patch
+Patch4: openssl-1.1.1w-cve-2024-5535-1.patch
+Patch5: openssl-1.1.1w-cve-2024-5535-2.patch
+Patch6: openssl-1.1.1w-cve-2024-5535-3.patch
+Patch7: openssl-1.1.1w-cve-2024-5535-4.patch
+Patch8: openssl-1.1.1w-cve-2024-5535-5.patch
+Patch9: openssl-1.1.1w-cve-2024-5535-6.patch
+Patch10: openssl-1.1.1w-cve-2024-5535-7.patch
+Patch11: openssl-1.1.1w-cve-2024-5535-8.patch
+Patch12: openssl-1.1.1w-cve-2024-9143.patch
+Patch13: openssl-1.1.1w-cve-2024-13176.patch
+Patch14: openssl-1.1.1w-cve-2025-9230.patch
 
 
 
@@ -60,6 +71,17 @@ support various cryptographic algorithms and protocols.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p1
+%patch8 -p1
+%patch9 -p1
+%patch10 -p1
+%patch11 -p1
+%patch12 -p1
+%patch13 -p1
+%patch14 -p1
 
 %build
 # Force dependency resolution to pick /usr/bin/perl instead of /bin/perl
@@ -125,6 +147,9 @@ ln -s %{_prefix}/lib/libssl-ea.so.%{_path_version} $RPM_BUILD_ROOT/%{_prefix}/li
 %postun -p /sbin/ldconfig
 
 %changelog
+* Tue Oct 22 2024 Cory McIntire <cory@cpanel.net> - 1.1.1w-5
+- EA-13156: Patch ea-openssl11 for CVE-2025-9230
+
 * Tue Jul 09 2024 Cory McIntire <cory@cpanel.net> - 1.1.1w-4
 - EA-12205: Patch ea-openssl11 for CVE-2024-4741
 
