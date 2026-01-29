@@ -10,7 +10,7 @@ Name:       ea-openssl11
 %global _path_version 1.1
 Version:    1.1.1w
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4544 for more details
-%define release_prefix 5
+%define release_prefix 6
 Release: %{release_prefix}%{?dist}.cpanel
 License:    OpenSSL
 Group:      System Environment/Libraries
@@ -34,6 +34,13 @@ Patch11: openssl-1.1.1w-cve-2024-5535-8.patch
 Patch12: openssl-1.1.1w-cve-2024-9143.patch
 Patch13: openssl-1.1.1w-cve-2024-13176.patch
 Patch14: openssl-1.1.1w-cve-2025-9230.patch
+Patch15: openssl-1.1.1w-cve-2026-22796.patch
+Patch16: openssl-1.1.1w-cve-2025-69420.patch
+Patch17: openssl-1.1.1w-cve-2025-69421.patch
+Patch18: openssl-1.1.1w-cve-2025-68160.patch
+Patch19: openssl-1.1.1w-cve-2025-69418.patch
+Patch20: openssl-1.1.1w-cve-2025-69419.patch
+Patch21: openssl-1.1.1w-cve-2026-22795.patch
 
 
 
@@ -82,6 +89,13 @@ support various cryptographic algorithms and protocols.
 %patch12 -p1
 %patch13 -p1
 %patch14 -p1
+%patch15 -p1
+%patch16 -p1
+%patch17 -p1
+%patch18 -p1
+%patch19 -p1
+%patch20 -p1
+%patch21 -p1
 
 %build
 # Force dependency resolution to pick /usr/bin/perl instead of /bin/perl
@@ -147,6 +161,11 @@ ln -s %{_prefix}/lib/libssl-ea.so.%{_path_version} $RPM_BUILD_ROOT/%{_prefix}/li
 %postun -p /sbin/ldconfig
 
 %changelog
+* Thu Jan 29 2026 Cory McIntire <cory@cpanel.net> - 1.1.1w-6
+- EA-13327: Patch ea-openssl11 for multiple CVEs:
+  CVE-2025-68160, CVE-2025-69418, CVE-2025-69419, CVE-2025-69420,
+  CVE-2025-69421, CVE-2026-22795, CVE-2026-22796
+
 * Tue Oct 22 2024 Cory McIntire <cory@cpanel.net> - 1.1.1w-5
 - EA-13156: Patch ea-openssl11 for CVE-2025-9230
 
