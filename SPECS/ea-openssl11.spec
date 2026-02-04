@@ -163,8 +163,13 @@ ln -s %{_prefix}/lib/libssl-ea.so.%{_path_version} $RPM_BUILD_ROOT/%{_prefix}/li
 %changelog
 * Thu Jan 29 2026 Cory McIntire <cory@cpanel.net> - 1.1.1w-6
 - EA-13327: Patch ea-openssl11 for multiple CVEs:
-  CVE-2025-68160, CVE-2025-69418, CVE-2025-69419, CVE-2025-69420,
-  CVE-2025-69421, CVE-2026-22795, CVE-2026-22796
+  CVE-2025-68160 (Heap out-of-bounds write in BIO_f_linebuffer on short writes)
+  CVE-2025-69418 (Unauthenticated/unencrypted trailing bytes with low-level OCB function calls)
+  CVE-2025-69419 (Out of bounds write in PKCS12_get_friendlyname())
+  CVE-2025-69420 (Missing ASN1_TYPE validation in TS_RESP_verify_response() function)
+  CVE-2025-69421 (NULL Pointer Dereference in PKCS12_item_decrypt_d2i_ex function)
+  CVE-2026-22795 (Missing ASN1_TYPE validation in PKCS#12 parsing)
+  CVE-2026-22796 (ASN1_TYPE Type Confusion in the PKCS7_digest_from_attributes() function)
 
 * Tue Oct 22 2024 Cory McIntire <cory@cpanel.net> - 1.1.1w-5
 - EA-13156: Patch ea-openssl11 for CVE-2025-9230
