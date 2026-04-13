@@ -10,7 +10,7 @@ Name:       ea-openssl11
 %global _path_version 1.1
 Version:    1.1.1w
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4544 for more details
-%define release_prefix 6
+%define release_prefix 7
 Release: %{release_prefix}%{?dist}.cpanel
 License:    OpenSSL
 Group:      System Environment/Libraries
@@ -41,6 +41,10 @@ Patch18: openssl-1.1.1w-cve-2025-68160.patch
 Patch19: openssl-1.1.1w-cve-2025-69418.patch
 Patch20: openssl-1.1.1w-cve-2025-69419.patch
 Patch21: openssl-1.1.1w-cve-2026-22795.patch
+Patch22: openssl-1.1.1w-cve-2026-28387.patch
+Patch23: openssl-1.1.1w-cve-2026-28388.patch
+Patch24: openssl-1.1.1w-cve-2026-28389.patch
+Patch25: openssl-1.1.1w-cve-2026-28390.patch
 
 
 
@@ -96,6 +100,10 @@ support various cryptographic algorithms and protocols.
 %patch19 -p1
 %patch20 -p1
 %patch21 -p1
+%patch22 -p1
+%patch23 -p1
+%patch24 -p1
+%patch25 -p1
 
 %build
 # Force dependency resolution to pick /usr/bin/perl instead of /bin/perl
@@ -161,6 +169,13 @@ ln -s %{_prefix}/lib/libssl-ea.so.%{_path_version} $RPM_BUILD_ROOT/%{_prefix}/li
 %postun -p /sbin/ldconfig
 
 %changelog
+* Mon Apr 13 2026 Cory McIntire <cory@cpanel.net> - 1.1.1w-7
+- EA-13406: Patch ea-openssl11 for multiple CVEs:
+  CVE-2026-28387 (Memory management fix in dane_match_cert() - use X509_free() instead of OPENSSL_free() on mcert)
+  CVE-2026-28388 (NULL Dereference When Delta CRL Lacks CRL Number Extension)
+  CVE-2026-28389 (NULL deref in ecdh_cms_set_shared_info via crafted CMS EnvelopedData with missing KeyEncryptionAlgorithmIdentifier parameters)
+  CVE-2026-28390 (NULL deref in rsa_cms_decrypt via missing RSA-OAEP SourceFunc parameters in CMS KeyTransportRecipientInfo)
+
 * Thu Jan 29 2026 Cory McIntire <cory@cpanel.net> - 1.1.1w-6
 - EA-13327: Patch ea-openssl11 for multiple CVEs:
   CVE-2025-68160 (Heap out-of-bounds write in BIO_f_linebuffer on short writes)
