@@ -10,7 +10,7 @@ Name:       ea-openssl11
 %global _path_version 1.1
 Version:    1.1.1w
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4544 for more details
-%define release_prefix 7
+%define release_prefix 8
 Release: %{release_prefix}%{?dist}.cpanel
 License:    OpenSSL
 Group:      System Environment/Libraries
@@ -45,6 +45,11 @@ Patch22: openssl-1.1.1w-cve-2026-28387.patch
 Patch23: openssl-1.1.1w-cve-2026-28388.patch
 Patch24: openssl-1.1.1w-cve-2026-28389.patch
 Patch25: openssl-1.1.1w-cve-2026-28390.patch
+Patch26: openssl-1.1.1w-cve-2026-45447.patch
+Patch27: openssl-1.1.1w-cve-2026-34180.patch
+Patch28: openssl-1.1.1w-cve-2026-7383.patch
+Patch29: openssl-1.1.1w-cve-2026-9076.patch
+Patch30: openssl-1.1.1w-cve-2026-42766.patch
 
 
 
@@ -104,6 +109,11 @@ support various cryptographic algorithms and protocols.
 %patch23 -p1
 %patch24 -p1
 %patch25 -p1
+%patch26 -p1
+%patch27 -p1
+%patch28 -p1
+%patch29 -p1
+git apply --no-index --binary %{PATCH30}
 
 %build
 # Force dependency resolution to pick /usr/bin/perl instead of /bin/perl
@@ -169,6 +179,14 @@ ln -s %{_prefix}/lib/libssl-ea.so.%{_path_version} $RPM_BUILD_ROOT/%{_prefix}/li
 %postun -p /sbin/ldconfig
 
 %changelog
+* Tue Jun 16 2026 Cory McIntire <cory@cpanel.net> - 1.1.1w-8
+- EA-13462: Patch ea-openssl11 for multiple CVEs:
+  CVE-2026-45447 (Heap use-after-free in PKCS7_verify() - pop and free each BIO in the p7bio chain on the error path instead of BIO_free_all() over a chain whose tail may be caller-owned)
+  CVE-2026-34180 (Heap buffer over-read in ASN.1 content parsing - reject length values that do not fit in an int before passing to ASN1_STRING_set() and c2i_ASN1_OBJECT() from asn1_ex_c2i())
+  CVE-2026-7383 (Heap buffer overflow in ASN.1 multibyte string conversion - range-check the BMPSTRING/UNIVERSALSTRING output size and the UTF-8 byte-count accumulator in ASN1_mbstring_ncopy())
+  CVE-2026-9076 (Out-of-bounds read in CMS password-based decryption - reject KEK ciphers with a block size below 4 octets in kek_unwrap_key())
+  CVE-2026-42766 (NULL pointer dereference in CMS password-based decryption when the optional keyDerivationAlgorithm is absent from PasswordRecipientInfo)
+
 * Mon Apr 13 2026 Cory McIntire <cory@cpanel.net> - 1.1.1w-7
 - EA-13406: Patch ea-openssl11 for multiple CVEs:
   CVE-2026-28387 (Memory management fix in dane_match_cert() - use X509_free() instead of OPENSSL_free() on mcert)
