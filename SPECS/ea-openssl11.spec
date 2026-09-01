@@ -10,7 +10,7 @@ Name:       ea-openssl11
 %global _path_version 1.1
 Version:    1.1.1w
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4544 for more details
-%define release_prefix 8
+%define release_prefix 9
 Release: %{release_prefix}%{?dist}.cpanel
 License:    OpenSSL
 Group:      System Environment/Libraries
@@ -50,6 +50,8 @@ Patch27: openssl-1.1.1w-cve-2026-34180.patch
 Patch28: openssl-1.1.1w-cve-2026-7383.patch
 Patch29: openssl-1.1.1w-cve-2026-9076.patch
 Patch30: openssl-1.1.1w-cve-2026-42766.patch
+Patch31: openssl-1.1.1w-cve-2026-54874.patch
+Patch32: openssl-1.1.1w-cve-2026-63072.patch
 
 
 
@@ -114,6 +116,8 @@ support various cryptographic algorithms and protocols.
 %patch28 -p1
 %patch29 -p1
 git apply --no-index --binary %{PATCH30}
+%patch31 -p1
+%patch32 -p1
 
 %build
 # Force dependency resolution to pick /usr/bin/perl instead of /bin/perl
@@ -179,6 +183,11 @@ ln -s %{_prefix}/lib/libssl-ea.so.%{_path_version} $RPM_BUILD_ROOT/%{_prefix}/li
 %postun -p /sbin/ldconfig
 
 %changelog
+* Wed Aug 26 2026 Cory McIntire <cory@cpanel.net> - 1.1.1w-9
+- EA-13540: Patch ea-openssl11 for multiple CVEs:
+  CVE-2026-54874 (Excessive memory use buffering DTLS records for a future epoch - copy only the record's own on-wire bytes into the queue entry instead of taking ownership of the entire live read buffer, and lower the unprocessed_rcds queue limit from 100 to 16)
+  CVE-2026-63072 (Heap buffer overflow in CMS key unwrapping - size the AES-WRAP-PAD unwrap output buffer for the inlen worst case that the RFC 5649 integrity-failure paths write and cleanse)
+
 * Tue Jun 16 2026 Cory McIntire <cory@cpanel.net> - 1.1.1w-8
 - EA-13462: Patch ea-openssl11 for multiple CVEs:
   CVE-2026-45447 (Heap use-after-free in PKCS7_verify() - pop and free each BIO in the p7bio chain on the error path instead of BIO_free_all() over a chain whose tail may be caller-owned)
