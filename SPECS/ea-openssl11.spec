@@ -10,7 +10,7 @@ Name:       ea-openssl11
 %global _path_version 1.1
 Version:    1.1.1w
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4544 for more details
-%define release_prefix 9
+%define release_prefix 10
 Release: %{release_prefix}%{?dist}.cpanel
 License:    OpenSSL
 Group:      System Environment/Libraries
@@ -52,6 +52,11 @@ Patch29: openssl-1.1.1w-cve-2026-9076.patch
 Patch30: openssl-1.1.1w-cve-2026-42766.patch
 Patch31: openssl-1.1.1w-cve-2026-54874.patch
 Patch32: openssl-1.1.1w-cve-2026-63072.patch
+Patch33: openssl-1.1.1w-cve-2026-84782.patch
+Patch34: openssl-1.1.1w-cve-2026-35189.patch
+Patch35: openssl-1.1.1w-cve-2026-54872.patch
+Patch36: openssl-1.1.1w-cve-2026-75806.patch
+Patch37: openssl-1.1.1w-cve-2026-77696.patch
 
 
 
@@ -118,6 +123,11 @@ support various cryptographic algorithms and protocols.
 git apply --no-index --binary %{PATCH30}
 %patch31 -p1
 %patch32 -p1
+%patch33 -p1
+%patch34 -p1
+%patch35 -p1
+%patch36 -p1
+%patch37 -p1
 
 %build
 # Force dependency resolution to pick /usr/bin/perl instead of /bin/perl
@@ -183,6 +193,14 @@ ln -s %{_prefix}/lib/libssl-ea.so.%{_path_version} $RPM_BUILD_ROOT/%{_prefix}/li
 %postun -p /sbin/ldconfig
 
 %changelog
+* Thu Oct 01 2026 Cory McIntire <cory.mcintire@webpros.com> - 1.1.1w-10
+- EA-13575: Patch ea-openssl11 for multiple CVEs:
+  CVE-2026-84782 (DTLS retransmits handshake messages from a stale buffer offset - reset init_off before resending a buffered message and skip retransmission while a handshake write is still suspended)
+  CVE-2026-35189 (Excessive memory allocation in relative CRLDP processing - defer building the full distribution point name until a CRL is matched against the certificate)
+  CVE-2026-54872 (Timing side-channel in scalar multiplication for non-NIST EC curves - pad the secret scalar to a fixed width in ec_scalar_mul_ladder())
+  CVE-2026-75806 (Unauthenticated and undersized DTLS 1.2 AEAD record causes DoS - reject records shorter than the explicit IV and tag overhead before AEAD processing)
+  CVE-2026-77696 (Timing side-channel in SM2 signature generation - fixed-width nonce and constant-time arithmetic in sm2_sig_gen())
+
 * Wed Aug 26 2026 Cory McIntire <cory@cpanel.net> - 1.1.1w-9
 - EA-13540: Patch ea-openssl11 for multiple CVEs:
   CVE-2026-54874 (Excessive memory use buffering DTLS records for a future epoch - copy only the record's own on-wire bytes into the queue entry instead of taking ownership of the entire live read buffer, and lower the unprocessed_rcds queue limit from 100 to 16)
